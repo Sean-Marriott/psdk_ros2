@@ -2,8 +2,8 @@
  * TODO: Add file description
  */
 
-#ifndef PSDK_WRAPPER_INCLUDE_PSDK_WRAPPER_MODULES_USB_CAMERA_HPP_
-#define PSDK_WRAPPER_INCLUDE_PSDK_WRAPPER_MODULES_USB_CAMERA_HPP_
+#ifndef PSDK_WRAPPER_INCLUDE_PSDK_WRAPPER_MODULES_VIDEO_STREAM_HPP_
+#define PSDK_WRAPPER_INCLUDE_PSDK_WRAPPER_MODULES_VIDEO_STREAM_HPP_
 
 #include <rclcpp/rclcpp.hpp>
 #include <rclcpp_lifecycle/lifecycle_node.hpp>
@@ -13,22 +13,22 @@
 namespace psdk_ros2
 {
 
-class UsbCameraModule : public rclcpp_lifecycle::LifecycleNode
+class VideoStreamModule : public rclcpp_lifecycle::LifecycleNode
 {
   public:
   /**
-   * @brief Construct a new UsbCameraModule object
+   * @brief Construct a new VideoStreamModule object
    * @param node_name Name of the node
    */
-  explicit UsbCameraModule(const std::string& name);
+  explicit VideoStreamModule(const std::string& name);
 
   /**
-   * @brief Destroy the usb camera module object
+   * @brief Destroy the video stream module object
    */
-  ~UsbCameraModule();
+  ~VideoStreamModule();
 
   /**
-   * @brief Configure the usb camera module. Creates the ROS 2 subscribers
+   * @brief Configure the video stream module. Creates the ROS 2 subscribers
    * and services.
    * @param state rclcpp_lifecycle::State. Current state of the node.
    * @return CallbackReturn SUCCESS or FAILURE
@@ -36,14 +36,14 @@ class UsbCameraModule : public rclcpp_lifecycle::LifecycleNode
   CallbackReturn on_configure(const rclcpp_lifecycle::State& state);
 
   /**
-   * @brief Activate the usb camera module.
+   * @brief Activate the video stream module.
    * @param state rclcpp_lifecycle::State. Current state of the node.
    * @return CallbackReturn SUCCESS or FAILURE
    */
   CallbackReturn on_activate(const rclcpp_lifecycle::State& state);
 
   /**
-   * @brief Clean the usb camera module. Resets the ROS 2 subscribers and
+   * @brief Clean the video stream module. Resets the ROS 2 subscribers and
    * services.
    * @param state rclcpp_lifecycle::State. Current state of the node.
    * @return CallbackReturn SUCCESS or FAILURE
@@ -51,39 +51,39 @@ class UsbCameraModule : public rclcpp_lifecycle::LifecycleNode
   CallbackReturn on_cleanup(const rclcpp_lifecycle::State& state);
 
   /**
-   * @brief Deactivate the usb camera module.
+   * @brief Deactivate the video stream module.
    * @param state rclcpp_lifecycle::State. Current state of the node.
    * @return CallbackReturn SUCCESS or FAILURE
-   */
+   */Ca
   CallbackReturn on_deactivate(const rclcpp_lifecycle::State& state);
 
   /**
-   * @brief Shutdown the usb camera module.
+   * @brief Shutdown the video stream module.
    * @param state rclcpp_lifecycle::State. Current state of the node.
    * @return CallbackReturn SUCCESS or FAILURE
    */
   CallbackReturn on_shutdown(const rclcpp_lifecycle::State& state);
 
   /**
-   * @brief Initialize the usb camera module.
+   * @brief Initialize the video stream module.
    * @return true/false
    */
   bool init();
 
   /**
-   * @brief Deinitialize the usb camera module
+   * @brief Deinitialize the video stream module
    * @return true/false
    */
   bool deinit();
 
   private:
   /**
-   * @brief Callback function for the usb camera
+   * @brief Callback function for the video stream
    * @param msg Image message
    */
-  void usbCameraCallback(const sensor_msgs::msg::Image::SharedPtr msg);
+  void videoStreamCallback(const sensor_msgs::msg::Image::SharedPtr msg);
 
-  rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr usb_camera_sub_;
+  rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr video_stream_sub_;
 
   bool is_module_initialized_{false};
 
@@ -92,4 +92,4 @@ class UsbCameraModule : public rclcpp_lifecycle::LifecycleNode
 };
 } // namespace psdk_ros2
 
-#endif // PSDK_WRAPPER_INCLUDE_PSDK_WRAPPER_MODULES_USB_CAMERA_HPP_
+#endif // PSDK_WRAPPER_INCLUDE_PSDK_WRAPPER_MODULES_VIDEO_STREAM_HPP_

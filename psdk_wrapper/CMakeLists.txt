@@ -161,7 +161,7 @@ add_library(psdk_wrapper_libs SHARED
   src/modules/liveview.cpp
   src/modules/hms.cpp
   src/modules/perception.cpp
-  src/modules/usb_camera.cpp
+  src/modules/video_stream.cpp
   src/utils/node_thread.cpp
   ${DJI_OSAL_PATH}/osal_fs.c
   ${DJI_OSAL_PATH}/osal_socket.c
