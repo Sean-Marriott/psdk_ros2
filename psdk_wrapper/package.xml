@@ -27,6 +27,8 @@
   <depend>psdk_interfaces</depend>
   <depend>std_srvs</depend>
   <depend>nlohmann-json-dev</depend>
+  <depend>OpenCV</depend>
+  <depend>cv_bridge</depend>
 
   <export>
     <build_type>ament_cmake</build_type>

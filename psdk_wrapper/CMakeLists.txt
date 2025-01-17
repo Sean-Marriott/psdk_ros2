@@ -32,6 +32,8 @@ find_package(tf2_ros REQUIRED)
 find_package(psdk_interfaces REQUIRED)
 find_package(std_srvs REQUIRED)
 find_package(nlohmann_json REQUIRED)
+find_package(cv_bridge REQUIRED)
+find_package(OpenCV REQUIRED)
 
 # FetchContent module
 include(FetchContent)
@@ -132,6 +134,7 @@ include_directories(${DJI_OSAL_PATH})
 include_directories(${DJI_HAL_PATH})
 include_directories(${DJI_STREAMING_PATH})
 include_directories(${DJI_UTILS_PATH})
+include_directories(${OpenCV_INCLUDE_DIRS})
 include_directories(${PSDK_PATH}/psdk_lib/include)
 include_directories(include)
 
@@ -146,6 +149,8 @@ set(dependencies
   nav_msgs
   psdk_interfaces
   std_srvs
+  cv_bridge
+  OpenCV
 )
 
 add_executable(psdk_wrapper_node
@@ -177,6 +182,17 @@ add_library(psdk_wrapper_libs SHARED
   ${DJI_UTILS_PATH}/utils/dji_config_manager.c
 )
 
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(LIBAV REQUIRED IMPORTED_TARGET
+  libavdevice
+  libavfilter
+  libavformat
+  libavcodec
+  libswresample
+  libswscale
+  libavutil
+)
+
 ament_target_dependencies(psdk_wrapper_libs
   ${dependencies}
 )
@@ -191,9 +207,9 @@ target_link_libraries(
   psdk_wrapper_node
   psdk_wrapper_libs
   ${FFMPEG_LIBRARIES}
+  ${OpenCV_LIBS}
+  PkgConfig::LIBAV
   -lusb-1.0
-  -lavcodec
-  -lswscale
 )
 
 install(TARGETS
