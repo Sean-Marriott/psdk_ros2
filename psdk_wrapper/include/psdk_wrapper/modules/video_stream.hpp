@@ -121,6 +121,7 @@ class VideoStreamModule : public rclcpp_lifecycle::LifecycleNode
   AVFrame *avFrame;
   
 };
+  extern std::shared_ptr<VideoStreamModule> global_video_stream_ptr_;
 } // namespace psdk_ros2
 
 #endif // PSDK_WRAPPER_INCLUDE_PSDK_WRAPPER_MODULES_VIDEO_STREAM_HPP_
